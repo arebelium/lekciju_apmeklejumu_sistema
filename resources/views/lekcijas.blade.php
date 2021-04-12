@@ -9,14 +9,13 @@
                 <div class="col-lg-10 mx-auto">
                     <h1 class="text-uppercase">
                         <strong>
-                            Sveicināts!
+                            Lekcijas būs te!
                         </strong>
+
                     </h1>
                     <hr>
                 </div>
-                <div class="col-lg-8 mx-auto">
-                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="/lekcijas">Lekciju saraksts</a>
-                </div>
+                
             </div>
         </div>
     </header>

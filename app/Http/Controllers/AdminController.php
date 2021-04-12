@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\lecturer;
+use App\lecture;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -95,7 +96,9 @@ class AdminController extends Controller
     {
         if(Auth::check()) {
             $lecture = Lecture::find($id);
+            $lecture->name = $request->input('name');
             $lecture->date = $request->input('date');
+            $lecture->time = $request->input('time');
             $lecture->lecturer = $request->input('lecturer');
             $lecture->save();
             Session::flash('message-lecture-edited', "Lekcija veiksmīgi labota!");
@@ -108,7 +111,9 @@ class AdminController extends Controller
     {
         if(Auth::check()) {
             $lecture = new Lecture;
+            $lecture->name = $request->input('name');
             $lecture->date = $request->input('date');
+            $lecture->time = $request->input('time');
             $lecture->lecturer = $request->input('lecturer');
             $lecture->save();
             Session::flash('message-lecture-added', "Lekcija veiksmīgi pievienota!");

@@ -9,7 +9,7 @@ class Lecture extends Model
     public $timestamps = false;
     protected $table = 'lectures';
     protected $fillable = [
-        'date', 'lecturer'
+        'name','date', 'time', 'lecturer'
     ];
 
 }

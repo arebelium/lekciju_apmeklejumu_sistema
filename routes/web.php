@@ -40,3 +40,5 @@ Route::prefix('lecturer')->group(function() {
     Route::post('/login', 'Auth\LecturerLoginController@login')->name('lecturer.login.submit');
     Route::get('/dash', 'LecturerController@index')->name('lecturer.home');
 });
+
+Route::view('/lekcijas', 'lekcijas');

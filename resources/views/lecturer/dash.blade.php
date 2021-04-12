@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 text-center">
-                    <h2>Lektoru panelis</h2>
+                    <h1>Lektoru panelis</h1>
 
                 </div>
             </div>
