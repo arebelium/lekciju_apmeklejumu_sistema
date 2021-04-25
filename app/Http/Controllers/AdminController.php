@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\lecturer;
 use App\lecture;
+use App\Course;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -97,9 +98,8 @@ class AdminController extends Controller
         if(Auth::check()) {
             $lecture = Lecture::find($id);
             $lecture->name = $request->input('name');
-            $lecture->date = $request->input('date');
-            $lecture->time = $request->input('time');
             $lecture->lecturer = $request->input('lecturer');
+            $lecture->course_id = $request->input('course_id');
             $lecture->save();
             Session::flash('message-lecture-edited', "Lekcija veiksmīgi labota!");
             return back();
@@ -112,9 +112,8 @@ class AdminController extends Controller
         if(Auth::check()) {
             $lecture = new Lecture;
             $lecture->name = $request->input('name');
-            $lecture->date = $request->input('date');
-            $lecture->time = $request->input('time');
             $lecture->lecturer = $request->input('lecturer');
+            $lecture->course_id = $request->input('course_id');
             $lecture->save();
             Session::flash('message-lecture-added', "Lekcija veiksmīgi pievienota!");
             return back();
@@ -127,6 +126,44 @@ class AdminController extends Controller
         if(Auth::check()) {
             DB::table('lectures')->where('id', '=', $id)->delete();
             Session::flash('message-lecture-deleted', "Lekcija veiksmīgi dzēsta!");
+            return back();
+        }else{
+            return redirect('/');
+        }
+    }
+
+
+
+
+    public function updateCourse(Request $request, $id)
+    {
+        if(Auth::check()) {
+            $course = Course::find($id);
+            $course->name = $request->input('name');
+            $course->save();
+            Session::flash('message-course-edited', "Kurss veiksmīgi labots!");
+            return back();
+        }else{
+            return redirect('/');
+        }
+    }
+    public function addCourse(Request $request)
+    {
+        if(Auth::check()) {
+            $course = new Course;
+            $course->name = $request->input('name');
+            $course->save();
+            Session::flash('message-course-added', "Kurss veiksmīgi pievienots!");
+            return back();
+        }else{
+            return redirect('/');
+        }
+    }
+    public function deleteCourse($id)
+    {
+        if(Auth::check()) {
+            DB::table('courses')->where('id', '=', $id)->delete();
+            Session::flash('message-course-deleted', "Kurss veiksmīgi dzēsts!");
             return back();
         }else{
             return redirect('/');

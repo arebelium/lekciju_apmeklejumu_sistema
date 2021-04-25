@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -5,10 +6,11 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 text-center">
-                    <h2>Administratora panelis</h2>
+                    <h1>Administratora panelis</h1></br>
                     <div class="card">
-                        <div class="card-header">Studenti</div>
-                        <div class="card-body justify-content-center">
+                    <button class="btn btn-primary" data-toggle="collapse" href="#students" role="button" aria-expanded="false" aria-controls="collapseExample">Studenti</button>
+                  
+                        <div class="card-body justify-content-center collapse" id="students">
                             @if(Session::has('message-user-updated'))
                                 <p class="alert alert-info">{{ Session::get('message-user-updated') }}</p>
                             @endif
@@ -78,10 +80,9 @@
                     </div>
                     <hr>
                     <div class="card">
-                            <div class="card-header">
-                                Lektoru informācija
-                            </div>
-                            <div class="card-body justify-content-center">
+                    <button class="btn btn-primary" data-toggle="collapse" href="#seeLecturers" role="button" aria-expanded="false" aria-controls="collapseExample">Lektori</button>
+                            
+                            <div class="card-body justify-content-center collapse" id="seeLecturers">
                                 @if(Session::has('message-lecturer-edited'))
                                     <p class="alert alert-info">{{ Session::get('message-lecturer-edited') }}</p>
                                 @endif
@@ -142,10 +143,9 @@
                     </div>
                         <hr>
                             <div class="card">
-                                <div class="card-header">
-                                    Lektoru pievienošana
-                                </div>
-                                <div class="card-body justify-content-center">
+                                <button class="btn btn-primary" data-toggle="collapse" href="#addLecturer" role="button" aria-expanded="false" aria-controls="collapseExample">Lektoru pievienošana</button>
+                                       
+                                <div class="card-body justify-content-center collapse" id="addLecturer">
                                     @if(Session::has('message-lecturer-added'))
                                         <p class="alert alert-info">{{ Session::get('message-lecturer-added') }}</p>
                                     @endif
@@ -195,10 +195,9 @@
                     </div>
                     <hr>
                             <div class="card">
-                                <div class="card-header">
-                                    Lekciju pievienošana
-                                </div>
-                                <div class="card-body justify-content-center">
+                            <button class="btn btn-primary" data-toggle="collapse" href="#addLecture" role="button" aria-expanded="false" aria-controls="collapseExample">Lekciju pievienošana</button>
+                                     
+                                <div class="card-body justify-content-center collapse" id="addLecture">
                                     @if(Session::has('message-lecture-added'))
                                         <p class="alert alert-info">{{ Session::get('message-lecture-added') }}</p>
                                     @endif
@@ -214,24 +213,18 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Datums') }}</label>
-                                                            <div class="col-md-6">
-                                                                <input type="date" class="form-control" name="date" required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="time" class="col-md-4 col-form-label text-md-right">{{ __('Sākuma laiks') }}</label>
-                                                            <div class="col-md-6">
-                                                                <input type="time" class="form-control" name="time" required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
                                                             <label for="lecturer" class="col-md-4 col-form-label text-md-right">{{ __('Lektora ID') }}</label>
                                                             <div class="col-md-6">
                                                                 <input type="number" class="form-control" name="lecturer">
                                                             </div>
                                                         </div>
-
+                                                        <div class="form-group row">
+                                                            <label for="course_id" class="col-md-4 col-form-label text-md-right">{{ __('Kursa ID') }}</label>
+                                                            <div class="col-md-6">
+                                                                <input type="number" class="form-control" name="course_id">
+                                                            </div>
+                                                        </div>
+                                                        
                                                         <div class="form-group row mb-0">
                                                             <div class="col-md-6 offset-md-4">
                                                                 <button type="submit" class="btn btn-primary">
@@ -244,7 +237,46 @@
 
                                             </div>
                                 </div>
+
+
                 </div>
+                 <hr>
+                            <div class="card">
+                            <button class="btn btn-primary" data-toggle="collapse" href="#addCourse" role="button" aria-expanded="false" aria-controls="collapseExample">Kursu pievienošana</button>
+                            
+                                <div class="card-body justify-content-center collapse" id="addCourse">
+                                    @if(Session::has('message-course-added'))
+                                        <p class="alert alert-info">{{ Session::get('message-course-added') }}</p>
+                                    @endif
+                                            <div class="card-body">
+
+                                                    <form method="POST" action="{{ action('AdminController@addCourse') }}">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('post') }}
+                                                        <div class="form-group row">
+                                                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Kursa kods') }}</label>
+                                                            <div class="col-md-6">
+                                                                <input type="text" class="form-control" name="name" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-md-6 offset-md-4">
+                                                                <button type="submit" class="btn btn-primary">
+                                                                    {{ __('Pievienot kursu') }}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+                                                    </form>
+
+                                            </div>
+                                </div>
+
+
+
+
+
+
             </div>
         </div>
     </section>

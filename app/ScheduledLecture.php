@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Lecture extends Model
+class ScheduledLecture extends Model
 {
     public $timestamps = false;
-    protected $table = 'lectures';
+    protected $table = 'lecture_schedule';
     protected $fillable = [
-        'name','lecturer', 'course_id'
+        'lecture_id','lecturer_id', 'date', 'time'
     ];
 
 }

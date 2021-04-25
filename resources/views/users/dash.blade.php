@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 text-center">
-                    <h2>Mans profils</h2>
+                    <h1>Mans profils</h1>
                     <div class="lectured">
                         <div class="lectured-header">
                            <strong><i class="fas fa-user"></i> Mana informācija</strong>

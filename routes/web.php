@@ -24,14 +24,25 @@ Route::patch('/profile/update/',  'UserController@update')->name('users.update')
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+    
+    Route::post('/add/user/', 'AdminController@addUser');
     Route::patch('/update/user/{id}', 'AdminController@updateUser');
     Route::get('/delete/user/{id}', 'AdminController@deleteUser');
+
     Route::patch('/update/lecturer/{id}', 'AdminController@updateLecturer');
     Route::get('/delete/lecturer/{id}', 'AdminController@deleteLecturer');
     Route::post('/add/lecturer/', 'AdminController@addLecturer');
+   
+    Route::post('/add/lecture/', 'AdminController@addLecture');
     Route::patch('/update/lecture/{id}', 'AdminController@updateLecture');
     Route::get('/delete/lecture/{id}', 'AdminController@deleteLecture');
-    Route::post('/add/lecture/', 'AdminController@addLecture');
+    
+    Route::post('/add/course/', 'AdminController@addCourse');
+    Route::patch('/update/course/{id}', 'AdminController@updateCourse');
+    Route::get('/delete/course/{id}', 'AdminController@deleteCourse');
+
+    Route::post('/schedule/lecture/', 'LecturerController@scheduleLecture');
+    
     Route::get('/', 'AdminController@index')->name('admin.home');
 });
 

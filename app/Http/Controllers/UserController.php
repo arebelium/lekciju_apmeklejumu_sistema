@@ -22,6 +22,8 @@ class UserController extends Controller
     {
         if(Auth::check()){
             $user = Auth::user();
+            $users = DB::table('users')->get();
+            $lecturers = DB::table('lecturers')->get();
             $lectures = DB::table('lectures')->where('lecturer', '=', $user->id)->get();
 
             return view('users.dash')->with('user', $user)->with('lectures', $lectures);
