@@ -15,23 +15,14 @@
                                 <p class="alert alert-info">{{ Session::get('message-profile-edited') }}</p>
                             @endif
 
-                            <p><strong>{{$user->name}} {{$user->last_name}}</strong></p>
-                            <p>E-pasts: {{$user->email}}</p>
+                            <p><strong>{{$student->name}} {{$student->last_name}}</strong></p>
+                            <p>E-pasts: {{$student->email}}</p>
+                            <p>Kurss: {{$student->course->name}}</p>
                         </div>
 
                     </div>
                     <br>
-                    <a href="{{ action('UserController@edit', Auth::user()) }}" class="btn btn-primary">Rediģēt informāciju</a>
-                    <hr>
-                    <h2>Lekcijas</h2>
-                    @foreach($lectures as $lecture)
-                        <div class="lecture">
-                            <div class="lecture-header">
-                                <strong> <i class="fas fa-lecture"></i>{{$lecture->name}} ({{$lecture->date}}) ({{$lecture->lecturer}}) </strong> <br> <br>
-                            </div>
-                        </div>
-                        <br>
-                    @endforeach
+                    <a href="{{ action('StudentController@edit', Auth::user()) }}" class="btn btn-primary">Rediģēt informāciju</a>
                 </div>
             </div>
         </div>

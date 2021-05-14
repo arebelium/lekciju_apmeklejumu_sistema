@@ -23,11 +23,18 @@ body {
 section{
   min-height:100%;
 }
+
 .edit-page{
-  min-height:1000px;
+  .card {
+    background: none;
+    padding-bottom:20px;
+  }
   padding-top:150px;
+  color:white;
+  min-height:1000px;
+  background: linear-gradient(rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0.8)), url("../img/header.jpeg") center center;
   background-size:cover;
-  h2, h3, a{
+  h1, h2, h3, a{
     color:white;
     text-align:center;
     margin-bottom:25px;
@@ -320,7 +327,7 @@ header.masthead p {
 .btn {
   font-weight: 700;
   text-transform: uppercase;
-  border: none;
+  border-color: #9d130b;
   border-radius: 300px;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }

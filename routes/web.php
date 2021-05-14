@@ -15,19 +15,23 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/home', function () {
+    return view('home');
+});
+
 Auth::routes();
 
-Route::get('/profile', 'UserController@index');
-Route::get('/profile/edit',  'UserController@edit')->name('users.edit');
-Route::patch('/profile/update/',  'UserController@update')->name('users.update');
+Route::get('/profile', 'StudentController@index');
+Route::get('/profile/edit',  'StudentController@edit')->name('students.edit');
+Route::patch('/profile/update/',  'StudentController@update')->name('students.update');
 
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     
-    Route::post('/add/user/', 'AdminController@addUser');
-    Route::patch('/update/user/{id}', 'AdminController@updateUser');
-    Route::get('/delete/user/{id}', 'AdminController@deleteUser');
+    Route::post('/add/student/', 'AdminController@addStudent');
+    Route::patch('/update/student/{id}', 'AdminController@updateStudent');
+    Route::get('/delete/student/{id}', 'AdminController@deleteStudent');
 
     Route::patch('/update/lecturer/{id}', 'AdminController@updateLecturer');
     Route::get('/delete/lecturer/{id}', 'AdminController@deleteLecturer');
@@ -42,7 +46,7 @@ Route::prefix('admin')->group(function() {
     Route::get('/delete/course/{id}', 'AdminController@deleteCourse');
 
     Route::post('/schedule/lecture/', 'LecturerController@scheduleLecture');
-    
+
     Route::get('/', 'AdminController@index')->name('admin.home');
 });
 
@@ -52,4 +56,8 @@ Route::prefix('lecturer')->group(function() {
     Route::get('/dash', 'LecturerController@index')->name('lecturer.home');
 });
 
-Route::view('/lekcijas', 'lekcijas');
+
+Route::prefix('lectures')->group(function() {
+    Route::get('/', 'LecturesController@index')->name('lectures');
+    Route::get('/delete/{id}', 'LecturesController@deleteLecture');
+});

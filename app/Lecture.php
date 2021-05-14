@@ -9,7 +9,11 @@ class Lecture extends Model
     public $timestamps = false;
     protected $table = 'lectures';
     protected $fillable = [
-        'name','lecturer', 'course_id'
+        'name'
     ];
 
+    public function scheduled_lectures()
+    {
+        return $this->hasMany(ScheduledLecture::class);
+    }
 }

@@ -22,7 +22,7 @@ class LecturerLoginController extends Controller
 
     use AuthenticatesUsers;
     /**
-     * Where to redirect users after login.
+     * Where to redirect students after login.
      *
      * @var string
      */

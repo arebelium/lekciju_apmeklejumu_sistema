@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Student;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -15,7 +15,7 @@ class RegisterController extends Controller
     | Register Controller
     |--------------------------------------------------------------------------
     |
-    | This controller handles the registration of new users as well as their
+    | This controller handles the registration of new students as well as their
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
@@ -24,7 +24,7 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     /**
-     * Where to redirect users after registration.
+     * Where to redirect students after registration.
      *
      * @var string
      */
@@ -53,7 +53,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:60'],
             'last_name' => ['required', 'string', 'max:60'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:students'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
@@ -62,11 +62,11 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \App\Student
      */
     protected function create(array $data)
     {
-        return User::create([
+        return Student::create([
             'name' => $data['name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],

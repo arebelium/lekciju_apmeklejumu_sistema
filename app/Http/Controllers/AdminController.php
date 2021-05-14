@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\User;
-use App\lecturer;
-use App\lecture;
+use App\Student;
+use App\Lecturer;
+use App\Lecture;
 use App\Course;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -22,37 +23,61 @@ class AdminController extends Controller
     public function index()
     {
         if(Auth::check()) {
-            $users = DB::table('users')->get();
-            $lecturers = DB::table('lecturers')->get();
-            return view('admin')->with('users', $users)->with('lecturers', $lecturers);
+            return view('admin')
+                ->with('students', Student::all())
+                ->with('lecturers', Lecturer::all())
+                ->with('lectures', Lecture::all())
+                ->with('courses', Course::all());
         }else{
             return redirect('/');
         }
     }
-    public function updateUser(Request $request, $id)
+
+    // Studenti
+
+    public function updateStudent(Request $request, $id)
     {
         if(Auth::check()) {
-            $user = User::find($id);
-            $user->name = $request->input('name');
-            $user->last_name = $request->input('last_name');
-            $user->email = $request->input('email');
-            $user->save();
-            Session::flash('message-user-updated', "Lietotājs veiksmīgi labots!");
+            $student = Student::find($id);
+            $student->name = $request->input('name');
+            $student->last_name = $request->input('last_name');
+            $student->email = $request->input('email');
+            $student->save();
+            Session::flash('message-student-updated', "Students veiksmīgi labots!");
             return back();
         }else{
             return redirect('/');
         }
     }
-    public function deleteUser($id)
+    public function deleteStudent($id)
     {
         if(Auth::check()) {
-            DB::table('users')->where('id', '=', $id)->delete();
-            Session::flash('message-user-deleted', "Lietotājs veiksmīgi dzēsts!");
+            DB::table('students')->where('id', '=', $id)->delete();
+            Session::flash('message-student-deleted', "Students veiksmīgi dzēsts!");
             return back();
         }else{
             return redirect('/');
         }
     }
+
+    public function addStudent(Request $request)
+    {
+        if(Auth::check()) {
+            $student = new Student;
+            $student->name = $request->input('name');
+            $student->last_name = $request->input('last_name');
+            $student->email = $request->input('email');
+            $student->password = Hash::make($request->input('password'));
+            $student->course_id = $request->input('course_id');
+            $student->save();
+            Session::flash('message-student-added', "Students veiksmīgi pievienots!");
+            return back();
+        }else{
+            return redirect('/');
+        }
+    }
+
+    // Lektori
     public function updateLecturer(Request $request, $id)
     {
         if(Auth::check()) {
@@ -93,13 +118,13 @@ class AdminController extends Controller
         }
     }
 
+    // Lekcijas
+
     public function updateLecture(Request $request, $id)
     {
         if(Auth::check()) {
             $lecture = Lecture::find($id);
             $lecture->name = $request->input('name');
-            $lecture->lecturer = $request->input('lecturer');
-            $lecture->course_id = $request->input('course_id');
             $lecture->save();
             Session::flash('message-lecture-edited', "Lekcija veiksmīgi labota!");
             return back();
@@ -112,8 +137,6 @@ class AdminController extends Controller
         if(Auth::check()) {
             $lecture = new Lecture;
             $lecture->name = $request->input('name');
-            $lecture->lecturer = $request->input('lecturer');
-            $lecture->course_id = $request->input('course_id');
             $lecture->save();
             Session::flash('message-lecture-added', "Lekcija veiksmīgi pievienota!");
             return back();
@@ -132,8 +155,7 @@ class AdminController extends Controller
         }
     }
 
-
-
+    // Kursi
 
     public function updateCourse(Request $request, $id)
     {

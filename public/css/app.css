@@ -11003,11 +11003,19 @@ section {
 }
 
 .edit-page {
-  min-height: 1000px;
   padding-top: 150px;
+  color: white;
+  min-height: 1000px;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/images/header.jpeg?bc768de72139bb0fca399a7d49769cd7) center center;
   background-size: cover;
 }
 
+.edit-page .card {
+  background: none;
+  padding-bottom: 20px;
+}
+
+.edit-page h1,
 .edit-page h2,
 .edit-page h3,
 .edit-page a {
@@ -11301,7 +11309,7 @@ header.masthead p {
 .btn {
   font-weight: 700;
   text-transform: uppercase;
-  border: none;
+  border-color: #9d130b;
   border-radius: 300px;
   font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
 }

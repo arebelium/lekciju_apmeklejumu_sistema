@@ -14,11 +14,18 @@ class CreateLecturesTable extends Migration {
 	{
 		Schema::create('lectures', function(Blueprint $table)
 		{
-			$table->integer('id', true);
+			$table->id();
 			$table->string('name');
-			$table->date('date');
-			$table->integer('lecturer')->index('lecturer');
 		});
+
+        Schema::create('scheduled_lectures', function(Blueprint $table)
+        {
+            $table->id();
+            $table->dateTime('date_time');
+            $table->foreignId('lecture_id')->constrained()->onDelete('cascade');
+            $table->foreignId('course_id')->constrained()->onDelete('cascade');
+            $table->foreignId('lecturer_id')->constrained()->onDelete('cascade');
+        });
 	}
 
 
@@ -29,7 +36,7 @@ class CreateLecturesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('lectures');
+
 	}
 
 }

@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\User;
+use App\Student;
 use App\Lecture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 
-class UserController extends Controller
+class StudentController extends Controller
 {
 
     public function __construct()
@@ -21,12 +21,8 @@ class UserController extends Controller
     public function index()
     {
         if(Auth::check()){
-            $user = Auth::user();
-            $users = DB::table('users')->get();
-            $lecturers = DB::table('lecturers')->get();
-            $lectures = DB::table('lectures')->where('lecturer', '=', $user->id)->get();
-
-            return view('users.dash')->with('user', $user)->with('lectures', $lectures);
+            $student = Auth::user();
+            return view('students.dash')->with('student', $student);
         }else{
             return redirect('/');
         }
@@ -35,8 +31,8 @@ class UserController extends Controller
     public function edit()
     {
         if(Auth::check()) {
-            $user = Auth::user();
-            return view('users.edit', compact('user'));
+            $student = Auth::user();
+            return view('students.edit', compact('student'));
         }else{
             return redirect('/');
         }
@@ -46,12 +42,12 @@ class UserController extends Controller
     public function update()
     {
         if(Auth::check()) {
-            $user = Auth::user();
-            $user->name = request('name');
-            $user->last_name = request('last_name');
-            $user->email = request('email');
+            $student = Auth::user();
+            $student->name = request('name');
+            $student->last_name = request('last_name');
+            $student->email = request('email');
 
-            $user->save();
+            $student->save();
             Session::flash('message-profile-edited', "Profils veiksmīgi atjaunots!");
             return back();
         }else{

@@ -29,7 +29,7 @@
 
                     <ul class="navbar-nav mx-auto navbar-left">
                         <li class="nav-item">
-                            <a class="nav-link" href="/lekcijas">Lekciju uzskaite</a>
+                            <a class="nav-link" href="/">Lekciju uzskaite</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav mx-auto navbar-center">
@@ -100,9 +100,6 @@
                                     <a class="dropdown-item" href="/lecturer/login">Lektors</a>
                                     <a class="dropdown-item" href="/admin/login">Administrators</a>
                                 </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Reģistrēties') }}</a>
                             </li>
                         @endif
                     </ul>

@@ -1,15 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\User;
+use App\Course;
 use App\Lecture;
-use App\Lecturers;
+use App\ScheduledLecture;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use App\ScheduledLecture;
 
 class LecturerController extends Controller
 {
@@ -28,19 +26,13 @@ class LecturerController extends Controller
      *
      * @ return \Illuminate\Http\Response
      */
-    // public function index()
-    // {
-    //     $forms = DB::table('forms')->get();
-    //     $lectures = DB::table('lectures')->get();
-    //     $lecturers = DB::table('lecturers')->get();
-    //     return view('lecturer/dash')->with('lectures', $lectures)->with('lecturers', $lecturers);
-    // }
     public function index()
     {
         if(Auth::check()){
             $lecturer = Auth::user();
-            $lectures = DB::table('lectures')->where('lecturer', '=', $lecturer->id)->get();
-            return view('lecturer.dash')->with('lecturer', $lecturer)->with('lectures', $lectures);
+            $courses = Course::pluck('name', 'id');
+            $lectures = Lecture::pluck('name', 'id');
+            return view('lecturer.dash')->with('lecturer', $lecturer)->with('courses', $courses)->with('lectures', $lectures);
         }else{
             return redirect('/');
         }
@@ -48,16 +40,15 @@ class LecturerController extends Controller
     public function scheduleLecture(Request $request)
     {
         if(Auth::check()) {
-        $scheduledLecture = new ScheduledLecture;
-        $scheduledLecture->lecture_id = $request->input('lecture_id');
-        $scheduledLecture->lecturer_id = $request->input('lecturer_id');
-        $scheduledLecture->date = $request->input('date');
-        $scheduledLecture->time = $request->input('time');
-        $scheduledLecture->save();
-        Session::flash('message-lecture-scheduled', "Lekcija veiksmīgi ieplānota!");
-        return back();
+            $scheduledLecture = new ScheduledLecture;
+            $scheduledLecture->course_id = $request->input('course_id');
+            $scheduledLecture->lecture_id = $request->input('lecture_id');
+            $scheduledLecture->lecturer_id = Auth::user()->id;
+            $scheduledLecture->date_time = $request->input('date_time');
+            $scheduledLecture->save();
+            return redirect()->back()->with('success','Lekcija veiksmīgi ieplānota!');
         }else{
-            return redirect('/');
+            return redirect('/')->with('error','Neesat autorizējies!');
         }
     }
 

@@ -15,7 +15,7 @@
                     <hr>
                 </div>
                 <div class="col-lg-8 mx-auto">
-                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="/lekcijas">Lekciju saraksts</a>
+                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="/lectures">Lekciju saraksts</a>
                 </div>
             </div>
         </div>

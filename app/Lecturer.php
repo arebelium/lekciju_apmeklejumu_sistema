@@ -13,7 +13,7 @@ class Lecturer extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'last_name', 'email', 'password' ,'position',
+        'name', 'last_name', 'email', 'password'
     ];
 
     /**
@@ -24,4 +24,9 @@ class Lecturer extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function lectures()
+    {
+        return $this->hasMany(Lecture::class);
+    }
 }

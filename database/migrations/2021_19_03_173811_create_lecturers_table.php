@@ -14,7 +14,7 @@ class CreateLecturersTable extends Migration {
 	{
 		Schema::create('lecturers', function(Blueprint $table)
 		{
-			$table->integer('id', true);
+			$table->id();
 			$table->string('name', 60);
 			$table->string('last_name', 32);
 			$table->string('email', 60)->unique();
@@ -32,7 +32,7 @@ class CreateLecturersTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('lecturers');
+
 	}
 
 }

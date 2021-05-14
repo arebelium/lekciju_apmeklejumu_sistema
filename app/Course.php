@@ -12,4 +12,13 @@ class Course extends Model
         'name'
     ];
 
+    public function lectures()
+    {
+        return $this->hasMany(Lecture::class);
+    }
+
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
 }

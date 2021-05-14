@@ -9,6 +9,7 @@
 2. Izpildīt šīs komandas:  <br />
     composer install # ieinstalēs frameworka failus  <br />
     php artisan migrate # izveidos tabulas  <br />
+    php artisan db:seed # izveidos administratora lietotāju  <br />
     npm install --ignore-scripts # ieinstalēs visus dependencies  <br />
     php artisan serve # palaidīs serveri  <br />
 
