@@ -27,6 +27,7 @@ class CreateCoursesTable extends Migration {
 	 */
 	public function down()
 	{
+        Schema::drop('attendances');
         Schema::drop('scheduled_lectures');
         Schema::drop('lectures');
         Schema::drop('students');

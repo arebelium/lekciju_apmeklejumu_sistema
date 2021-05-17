@@ -6,6 +6,24 @@
             <div class="row justify-content-center">
                 <div class="col-md-8 text-center">
                     <h1>Lektoru panelis</h1></br></br>
+
+                    <div class="card">
+                        <div class="card-header">
+                            Šodienas lekciju apmeklējumi
+                        </div>
+                        <div class="card-body justify-content-center">
+                            @include('flash-message')
+                            <ul class="list-group" style="color:black;">
+                            @foreach ($today_attendance as $attendance)
+                                <li class="list-group-item">
+                                    {{ $attendance->sc_lecture()->lecture->name }} ({{ $attendance->sc_lecture()->start_at }})
+                                    -> {{ $attendance->student()->name }} {{ $attendance->student()->last_name }} ({{ $attendance->student()->course->name }})
+                                </li>
+                            @endforeach
+                            </ul>
+                        </div>
+                    </div>
+
                     <div class="card">
                         <div class="card-header">
                         Ieplānot lekciju
@@ -42,11 +60,26 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="date_time" class="col-md-4 col-form-label text-md-right">{{ __('Datums un laiks') }}</label>
+                                        <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Datums') }}</label>
                                         <div class="col-md-6">
-                                            <input type="datetime-local" class="form-control" name="date_time" required>
+                                            <input type="date" class="form-control" name="date" required>
                                         </div>
                                     </div>
+
+                                    <div class="form-group row">
+                                        <label for="start_at" class="col-md-4 col-form-label text-md-right">{{ __('Sākums') }}</label>
+                                        <div class="col-md-6">
+                                            <input type="time" class="form-control" name="start_at" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="end_at" class="col-md-4 col-form-label text-md-right">{{ __('Beigas') }}</label>
+                                        <div class="col-md-6">
+                                            <input type="time" class="form-control" name="end_at" required>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group row mb-0">
                                         <div class="col-md-6 offset-md-4">
                                             <button type="submit" class="btn btn-primary">
@@ -58,6 +91,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

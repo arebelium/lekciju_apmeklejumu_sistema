@@ -57,7 +57,8 @@ Route::prefix('lecturer')->group(function() {
 });
 
 
-Route::prefix('lectures')->group(function() {
+Route::prefix('lectures')->middleware(['auth:web,lecturer,admin'])->group(function() {
     Route::get('/', 'LecturesController@index')->name('lectures');
     Route::get('/delete/{id}', 'LecturesController@deleteLecture');
+    Route::post('/check_attendance', 'LecturesController@checkAttendance')->name('lectures.check_attendance');
 });

@@ -39,6 +39,22 @@ section{
     text-align:center;
     margin-bottom:25px;
   }
+
+  .fc-scrollgrid {
+    background: rgba(19, 19, 19, 0.89);
+  }
+  .fc-scrollgrid-section-header {
+    background: rgba(3, 3, 3, 0.83);
+  }
+
+  .fc-day-today {
+    background-color: rgba(3, 3, 3, 0.53) !important;
+  }
+
+  .fc-event-time, .fc-event-title {
+    padding: 0;
+    white-space: normal;
+  }
 }
 
 

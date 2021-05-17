@@ -11024,6 +11024,24 @@ section {
   margin-bottom: 25px;
 }
 
+.edit-page .fc-scrollgrid {
+  background: rgba(19, 19, 19, 0.89);
+}
+
+.edit-page .fc-scrollgrid-section-header {
+  background: rgba(3, 3, 3, 0.83);
+}
+
+.edit-page .fc-day-today {
+  background-color: rgba(3, 3, 3, 0.53) !important;
+}
+
+.edit-page .fc-event-time,
+.edit-page .fc-event-title {
+  padding: 0;
+  white-space: normal;
+}
+
 hr {
   max-width: 50px;
   border-width: 3px;

@@ -43,5 +43,13 @@ class DatabaseSeeder extends Seeder
         DB::table('lectures')->insert([
             'name' => 'Programmēšana'
         ]);
+
+        DB::table('students')->insert([
+            'name' => 'Jānis',
+            'last_name' => 'Bērziņš',
+            'email' => 'students@va.lv',
+            'course_id' => 1,
+            'password' => bcrypt('parole123')
+        ]);
     }
 }

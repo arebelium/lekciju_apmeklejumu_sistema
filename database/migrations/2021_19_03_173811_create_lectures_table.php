@@ -21,7 +21,9 @@ class CreateLecturesTable extends Migration {
         Schema::create('scheduled_lectures', function(Blueprint $table)
         {
             $table->id();
-            $table->dateTime('date_time');
+            $table->date('date');
+            $table->time('start_at');
+            $table->time('end_at');
             $table->foreignId('lecture_id')->constrained()->onDelete('cascade');
             $table->foreignId('course_id')->constrained()->onDelete('cascade');
             $table->foreignId('lecturer_id')->constrained()->onDelete('cascade');

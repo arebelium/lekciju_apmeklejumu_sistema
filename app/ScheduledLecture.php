@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Model;
 
 class ScheduledLecture extends Model
@@ -9,8 +10,18 @@ class ScheduledLecture extends Model
     public $timestamps = false;
     protected $table = 'scheduled_lectures';
     protected $fillable = [
-        'lecturer_id', 'course_id', 'date_time', 'lecture_id'
+        'lecturer_id', 'course_id', 'start_at', 'end_at', 'date', 'lecture_id'
     ];
+
+    public function startDate()
+    {
+        return new DateTime("$this->date $this->start_at");
+    }
+
+    public function endDate()
+    {
+        return new DateTime("$this->date $this->end_at");
+    }
 
     public function lecturer()
     {
@@ -26,4 +37,5 @@ class ScheduledLecture extends Model
     {
         return $this->belongsTo(Course::class);
     }
+
 }
