@@ -16,7 +16,7 @@
                             <ul class="list-group" style="color:black;">
                             @foreach ($today_attendance as $attendance)
                                 <li class="list-group-item">
-                                    {{ $attendance->sc_lecture()->lecture->name }} ({{ $attendance->sc_lecture()->start_at }})
+                                    {{ $attendance->sc_lecture()->lecture->name }} ({{ date("H:i", strtotime($attendance->sc_lecture()->start_at)) }})
                                     -> {{ $attendance->student()->name }} {{ $attendance->student()->last_name }} ({{ $attendance->student()->course->name }})
                                 </li>
                             @endforeach

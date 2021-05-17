@@ -33,7 +33,9 @@ class LecturerController extends Controller
             $lecturer = Auth::user();
             $courses = Course::pluck('name', 'id');
             $lectures = Lecture::pluck('name', 'id');
+            $scheduled_lectures_ids = ScheduledLecture::where('lecturer_id', $lecturer->id)->pluck('id');
             $today_attendance = Attendance::whereDate('created_at', Carbon::today())
+                ->whereIn('scheduled_lecture_id', $scheduled_lectures_ids)
                 ->select('scheduled_lecture_id', 'student_id')
                 ->groupBy('scheduled_lecture_id', 'student_id')->get();
 
