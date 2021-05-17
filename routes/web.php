@@ -57,8 +57,10 @@ Route::prefix('lecturer')->group(function() {
 });
 
 
-Route::prefix('lectures')->middleware(['auth:web,lecturer,admin'])->group(function() {
+Route::prefix('lectures')->middleware('auth:student,lecturer,admin')->group(function() {
     Route::get('/', 'LecturesController@index')->name('lectures');
-    Route::get('/delete/{id}', 'LecturesController@deleteLecture');
-    Route::post('/check_attendance', 'LecturesController@checkAttendance')->name('lectures.check_attendance');
+    Route::get('/delete_sc', 'LecturesController@deleteScheduledLecture');
+    Route::post('/check_attendance', 'LecturesController@checkAttendance', function() {
+        return redirect('dashboard')->with('success', 'Profile updated!');
+    })->name('lectures.check_attendance');
 });

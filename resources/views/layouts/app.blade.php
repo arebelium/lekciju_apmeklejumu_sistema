@@ -77,7 +77,7 @@
                                     </form>
                                 </div>
                             </li>
-                        @elseif (Auth::guard('web')->check())
+                        @elseif (Auth::guard('student')->check())
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} {{ Auth::user()->last_name }} ({{ Auth::user()->course->name }})<span class="caret"></span>

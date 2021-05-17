@@ -9,9 +9,9 @@
                     <h1 class="text-uppercase">
                         <strong>
                             Ieplānotās lekcijas
-                            @include('flash-message')
                         </strong>
                     </h1>
+                    @include('flash-message')
                     <hr>
 
                     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -24,7 +24,7 @@
                     {!! $calendar->calendar() !!}
                     {!! $calendar->script() !!}
 
-                    @if (Auth::guard('web')->check())
+                    @if (Auth::guard('student')->check())
                         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" style="color: black;">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -43,6 +43,29 @@
                                             <input type="hidden" name="user_id" value=" {{ Auth::user()->id }}" />
                                             <button type="submit" class="btn btn-primary">
                                                 {{ __('Esmu ieradies') }}
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+
+                    @if (Auth::guard('lecturer')->check())
+                        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" style="color: black;">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <h4>Dzēst lekciju</h4>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <form method="GET" action="{{ action('LecturesController@deleteScheduledLecture') }}">
+                                            @csrf
+                                            <input type="hidden" name="lecture_id" id="lecture_id" value="" />
+                                            <button type="submit" class="btn btn-primary">
+                                                {{ __('Apstiprināt') }}
                                             </button>
                                         </form>
                                     </div>

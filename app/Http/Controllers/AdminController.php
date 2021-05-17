@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -43,8 +42,7 @@ class AdminController extends Controller
             $student->last_name = $request->input('last_name');
             $student->email = $request->input('email');
             $student->save();
-            Session::flash('message-student-updated', "Students veiksmīgi labots!");
-            return back();
+            return back()->with('success', "Students veiksmīgi labots!");
         }else{
             return redirect('/');
         }
@@ -53,8 +51,7 @@ class AdminController extends Controller
     {
         if(Auth::check()) {
             DB::table('students')->where('id', '=', $id)->delete();
-            Session::flash('message-student-deleted', "Students veiksmīgi dzēsts!");
-            return back();
+            return back()->with('success', "Students veiksmīgi dzēsts!");
         }else{
             return redirect('/');
         }
@@ -70,8 +67,7 @@ class AdminController extends Controller
             $student->password = Hash::make($request->input('password'));
             $student->course_id = $request->input('course_id');
             $student->save();
-            Session::flash('message-student-added', "Students veiksmīgi pievienots!");
-            return back();
+            return back()->with('success', "Students veiksmīgi pievienots!");
         }else{
             return redirect('/');
         }
@@ -86,8 +82,7 @@ class AdminController extends Controller
             $lecturer->last_name = $request->input('last_name');
             $lecturer->email = $request->input('email');
             $lecturer->save();
-            Session::flash('message-lecturer-edited', "Lektors veiksmīgi labots!");
-            return back();
+            return back()->with('success', "Lektors veiksmīgi labots!");
         }else{
             return redirect('/');
         }
@@ -101,8 +96,7 @@ class AdminController extends Controller
         $lecturer->email = $request->input('email');
         $lecturer->password = Hash::make($request->input('password'));
         $lecturer->save();
-        Session::flash('message-lecturer-added', "Lektors veiksmīgi pievienots!");
-        return back();
+        return back()->with('success', "Lektors veiksmīgi pievienots!");
         }else{
             return redirect('/');
         }
@@ -111,8 +105,7 @@ class AdminController extends Controller
     {
         if(Auth::check()) {
             DB::table('lecturers')->where('id', '=', $id)->delete();
-            Session::flash('message-lecturer-deleted', "Lektors veiksmīgi dzēsts!");
-            return back();
+            return back()->with('success', "Lektors veiksmīgi dzēsts!");
         }else{
             return redirect('/');
         }
@@ -126,8 +119,7 @@ class AdminController extends Controller
             $lecture = Lecture::find($id);
             $lecture->name = $request->input('name');
             $lecture->save();
-            Session::flash('message-lecture-edited', "Lekcija veiksmīgi labota!");
-            return back();
+            return back()->with('success', "Lekcija veiksmīgi labota!");
         }else{
             return redirect('/');
         }
@@ -138,8 +130,7 @@ class AdminController extends Controller
             $lecture = new Lecture;
             $lecture->name = $request->input('name');
             $lecture->save();
-            Session::flash('message-lecture-added', "Lekcija veiksmīgi pievienota!");
-            return back();
+            return back()->with('success', "Lekcija veiksmīgi pievienota!");
         }else{
             return redirect('/');
         }
@@ -148,8 +139,7 @@ class AdminController extends Controller
     {
         if(Auth::check()) {
             DB::table('lectures')->where('id', '=', $id)->delete();
-            Session::flash('message-lecture-deleted', "Lekcija veiksmīgi dzēsta!");
-            return back();
+            return back()->with('success', "Lekcija veiksmīgi dzēsta!");
         }else{
             return redirect('/');
         }
@@ -163,8 +153,7 @@ class AdminController extends Controller
             $course = Course::find($id);
             $course->name = $request->input('name');
             $course->save();
-            Session::flash('message-course-edited', "Kurss veiksmīgi labots!");
-            return back();
+            return back()->with('success', "Kurss veiksmīgi labots!");
         }else{
             return redirect('/');
         }
@@ -175,8 +164,7 @@ class AdminController extends Controller
             $course = new Course;
             $course->name = $request->input('name');
             $course->save();
-            Session::flash('message-course-added', "Kurss veiksmīgi pievienots!");
-            return back();
+            return back()->with('success', "Kurss veiksmīgi pievienots!");
         }else{
             return redirect('/');
         }
@@ -185,8 +173,7 @@ class AdminController extends Controller
     {
         if(Auth::check()) {
             DB::table('courses')->where('id', '=', $id)->delete();
-            Session::flash('message-course-deleted', "Kurss veiksmīgi dzēsts!");
-            return back();
+            return back()->with('success', "Kurss veiksmīgi dzēsts!");
         }else{
             return redirect('/');
         }

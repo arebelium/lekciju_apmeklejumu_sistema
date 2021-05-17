@@ -7,14 +7,14 @@
             <div class="row justify-content-center">
                 <div class="col-md-8 text-center">
                     <h1>Administratora panelis</h1><br>
+                    @include('flash-message')
                     <div class="card">
                     <button class="btn btn-primary" data-toggle="collapse" href="#students" role="button" aria-expanded="false" aria-controls="collapseExample">Studenti ({{$students->count()}})</button>
                         <div class="card-body justify-content-center collapse" id="students">
-                            @include('flash-message')
                             @foreach($students as $student)
                                 <div class="card">
                                     <div class="card-header">
-                                        <span>{{$student->name}} {{$student->last_name}} </span>
+                                        <span>{{$student->name}} {{$student->last_name}} ({{$student->course->name}}) </span>
                                         <button type="button" class="btn btn-primary" data-toggle="collapse" href="#editStudent{{$student->id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
                                             Rediģēt studentu
                                         </button>
@@ -73,7 +73,6 @@
                     <div class="card">
                     <button class="btn btn-primary" data-toggle="collapse" href="#seeLecturers" role="button" aria-expanded="false" aria-controls="collapseExample">Lektori ({{$lecturers->count()}})</button>
                         <div class="card-body justify-content-center collapse" id="seeLecturers">
-                            @include('flash-message')
                             @foreach($lecturers as $lecturer)
                                 <div class="card">
                                     <div class="card-header">
@@ -130,7 +129,6 @@
                     <div class="card">
                         <button class="btn btn-primary" data-toggle="collapse" href="#seeLectures" role="button" aria-expanded="false" aria-controls="collapseExample">Lekcijas ({{$lectures->count()}})</button>
                         <div class="card-body justify-content-center collapse" id="seeLectures">
-                            @include('flash-message')
                             @foreach($lectures as $lecture)
                                 <div class="card">
                                     <div class="card-header">
@@ -175,7 +173,6 @@
                     <div class="card">
                         <button class="btn btn-primary" data-toggle="collapse" href="#seeCourses" role="button" aria-expanded="false" aria-controls="collapseExample">Kursi ({{$courses->count()}})</button>
                         <div class="card-body justify-content-center collapse" id="seeCourses">
-                            @include('flash-message')
                             @foreach($courses as $course)
                                 <div class="card">
                                     <div class="card-header">
@@ -222,7 +219,6 @@
                     <div class="card">
                         <button class="btn btn-primary" data-toggle="collapse" href="#addStudent" role="button" aria-expanded="false" aria-controls="collapseExample">Studentu pievienošana</button>
                         <div class="card-body justify-content-center collapse" id="addStudent">
-                            @include('flash-message')
                             <div class="card-body">
                                 <form method="POST" action="{{ action('AdminController@addStudent') }}">
                                     {{ csrf_field() }}
@@ -257,7 +253,7 @@
                                         <div class="col-md-6">
                                             <select class="form-control" name="course_id" required>
                                                 @foreach ($courses as $key => $value)
-                                                    <option value="{{ $key }}">
+                                                    <option value="{{ $value->id }}">
                                                         {{ $value->name }}
                                                     </option>
                                                 @endforeach
@@ -280,7 +276,6 @@
                     <div class="card">
                         <button class="btn btn-primary" data-toggle="collapse" href="#addLecturer" role="button" aria-expanded="false" aria-controls="collapseExample">Lektoru pievienošana</button>
                         <div class="card-body justify-content-center collapse" id="addLecturer">
-                            @include('flash-message')
                             <div class="card-body">
                                 <form method="POST" action="{{ action('AdminController@addLecturer') }}">
                                     {{ csrf_field() }}
@@ -325,7 +320,6 @@
                     <div class="card">
                     <button class="btn btn-primary" data-toggle="collapse" href="#addLecture" role="button" aria-expanded="false" aria-controls="collapseExample">Lekciju pievienošana</button>
                         <div class="card-body justify-content-center collapse" id="addLecture">
-                            @include('flash-message')
                             <div class="card-body">
                                 <form method="POST" action="{{ action('AdminController@addLecture') }}">
                                     {{ csrf_field() }}
@@ -352,7 +346,6 @@
                     <div class="card">
                     <button class="btn btn-primary" data-toggle="collapse" href="#addCourse" role="button" aria-expanded="false" aria-controls="collapseExample">Kursu pievienošana</button>
                     <div class="card-body justify-content-center collapse" id="addCourse">
-                        @include('flash-message')
                         <div class="card-body">
                             <form method="POST" action="{{ action('AdminController@addCourse') }}">
                                 {{ csrf_field() }}

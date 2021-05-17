@@ -9,9 +9,7 @@
                     <h3>Profila labošana</h3>
                     <div class="card">
                         <div class="card-body">
-                            @if(Session::has('message-profile-edited'))
-                                <p class="alert alert-info">{{ Session::get('message-profile-edited') }}</p>
-                            @endif
+                            @include('flash-message')
                             <form method="post" action="{{action('StudentController@update', $student)}}">
                                 {{ csrf_field() }}
                                 {{ method_field('patch') }}

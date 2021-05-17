@@ -3,20 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\Student;
-use App\Lecture;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 
 
 class StudentController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     public function index()
     {
@@ -48,8 +38,7 @@ class StudentController extends Controller
             $student->email = request('email');
 
             $student->save();
-            Session::flash('message-profile-edited', "Profils veiksmīgi atjaunots!");
-            return back();
+            return back()->with('success', "Profils veiksmīgi atjaunots!");
         }else{
             return redirect('/');
         }

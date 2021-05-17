@@ -11,9 +11,7 @@
                            <strong><i class="fas fa-user"></i> Mana informācija</strong>
                         </div>
                         <div class="lectured-body justify-content-center">
-                            @if(Session::has('message-profile-edited'))
-                                <p class="alert alert-info">{{ Session::get('message-profile-edited') }}</p>
-                            @endif
+                            @include('flash-message')
 
                             <p><strong>{{$student->name}} {{$student->last_name}}</strong></p>
                             <p>E-pasts: {{$student->email}}</p>
